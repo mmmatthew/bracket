@@ -1,0 +1,23 @@
+<h1>Bracket</h1>
+<h2>bike tracking</h2>
+<form class="searchbox">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+
+      <input type="text" class="form-control" placeholder="find a bike" ng-model="searchBike">
+
+    </div>
+  </div>
+</form>
+<ul>
+  <li
+    ng-repeat='bike in bikeList | filter:searchBike as filteredList'
+    class="bike-row" ng-class="bike.status"
+    ng-click="updateSelection([bike])">
+    <span class="bike-id">{{bike.id}}</span>
+    <span class=" bike-type" >{{bike.type}}</span>
+    <span class="bike-last-seen">{{bike.lastSeen}}</span>
+    <span class="bike-status">{{bike.status}}</span>
+  </li>
+</ul>
