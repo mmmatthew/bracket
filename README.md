@@ -1,4 +1,5 @@
-# web2
+# Bracket
+![screenshot](https://github.com/mmmatthew/bracket/blob/master/Bracket.gif)
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.15.1.
