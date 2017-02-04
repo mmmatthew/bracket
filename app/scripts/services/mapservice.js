@@ -8,7 +8,7 @@
  * Service in the web2App.
  */
 angular.module('web2App')
-  .service('mapService', function (config, appData, randomService) {
+  .service('mapService', function ($rootScope, config, appData, randomService) {
 
 
     // Global variables
@@ -56,7 +56,7 @@ angular.module('web2App')
     var showBracket = function (bike) {
         var html = '<img src="images/bracket.png">';
         var bracketIcon = L.divIcon({html:html, className:'bracket-icon'});
-        var marker = new L.marker([bike.coords[1],bike.coords[0]], {icon:bracketIcon});
+        var marker = new L.marker(bike.coords, {icon:bracketIcon});
         layers.bracketLayer.addLayer(marker);
     };
     var hideBrackets = function () {
@@ -64,30 +64,33 @@ angular.module('web2App')
       layers.bracketLayer.eachLayer(function(l) {
         map.removeLayer(l);
       });
-    }
+    };
     var displayBikes = function (bikeList) {
-      // remove all bikes
-      layers.bikeLayer.eachLayer(function(l) {
-        map.removeLayer(l);
-      });
-      var focus = bikeList.length==1?' focus':'';
-      bikeList.forEach(function(bike) {
-        var html = '<div class="bike-icon btn-'+bike.status+focus+'"></div>';
-        var bikeIcon = L.divIcon({html:html, className:''});
-        var marker = new L.marker([bike.coords[1],bike.coords[0]], {icon:bikeIcon});
-        marker.bikeData = bike;
-        marker.on('click', function (e) {
-          appData.updateSelection([e.target.bikeData]);
-          appData.redigest();
+      if($rootScope.listLoaded){
+        // remove all bikes
+        layers.bikeLayer.eachLayer(function(l) {
+          map.removeLayer(l);
         });
-        layers.bikeLayer.addLayer(marker);
-      });
+        var focus = bikeList.length==1?' focus':'';
+        bikeList.forEach(function(bike) {
+          var html = '<div class="bike-icon btn-'+bike.status+focus+'"></div>';
+          var bikeIcon = L.divIcon({html:html, className:''});
+          var marker = new L.marker([bike.coords[0],bike.coords[1]], {icon:bikeIcon});
+          marker.bikeData = bike;
+          marker.on('click', function (e) {
+            appData.updateSelection([e.target.bikeData]);
+            appData.redigest();
+          });
+          layers.bikeLayer.addLayer(marker);
+        });
+      }
+
     };
 
     var displayPath = function (path) {
       // console.log(path)
       // create a red polyline from an array of LatLng points
-      layers.bikePathLayer.addLayer(L.polyline(randomService.path(50,0.02,bbox), {color: 'red'}));
+      layers.bikePathLayer.addLayer(L.polyline(path, {color: 'red'}));
     };
     var removePath = function () {
       layers.bikePathLayer.eachLayer(function(l) {

@@ -14,7 +14,10 @@ angular.module('web2App')
       link: function postLink(scope, element, attrs) {
         // element.text('this is the bikeMap directive');
         mapService.createMap('map');
-        mapService.displayBikes(appData.getBikeSelection());
+        scope.$on('listLoaded', function () {
+          mapService.displayBikes(appData.getBikeSelection());
+        })
+
 
         // WATCH
         // Updated selection
@@ -25,7 +28,7 @@ angular.module('web2App')
         });
         // Focus on bike
         scope.$on('bikeSelected',function(){
-          mapService.displayPath(appData.getBikePath())
+          mapService.displayPath(appData.getBikePath(scope.currentBike.id))
         });
         //
       }
