@@ -54,7 +54,7 @@ angular.module('web2App')
       },
       {
         id: '432511',
-        status: 'warning',
+        status: 'danger',
         lastSeen: '1.2.17 10:53',
         type: 'm-budget',
         coords: [

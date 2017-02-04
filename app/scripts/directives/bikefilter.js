@@ -7,7 +7,7 @@
  * # bikeFilter
  */
 angular.module('web2App')
-  .directive('bikeFilter', function (appData) {
+  .directive('bikeFilter', function (appData, mapService) {
     return {
       templateUrl: 'views/bikefilter.html',
       restrict: 'E',
@@ -15,6 +15,8 @@ angular.module('web2App')
         // element.text('this is the bikeFilter directive');
         scope.bikeList = appData.getBikeSelection();
         scope.updateSelection = appData.updateSelection;
+        scope.flash = mapService.showBracket;
+        scope.unflash = mapService.hideBrackets;
         scope.searchBike = '';
 
         // Watch for changes in the list

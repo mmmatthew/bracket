@@ -107,7 +107,8 @@ bike-details.ng-hide {
   display: block;
   /*position: absolute;*/
   width: 100%;
-  padding: 15px
+  height: 100%;
+  padding: 15px;
 }
 
 bike-details button.close{
@@ -131,18 +132,23 @@ bike-filter ul{
   padding:0;
 }
 
-.bike-row{
-  list-style: none;
+.bike-list-el{
+  display: block;
+  width: 100%;
   margin-top: 9px;
   border-radius: 5px;
   padding: 4px;
   cursor: pointer;
 }
-.ok{
-  background: #a6dc9c;
+.btn-ok{
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
 }
-.warning{
-  background: #dca7a7;
+.btn-ok:hover {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
 }
 
 
@@ -162,6 +168,17 @@ bike-map{
   text-align:center;
   border-radius:8px;
 }
+
+.bike-icon.focus{
+  border: 2px solid black;
+}
+.bracket-icon img{
+  width: 40px;
+  left: -15px;
+  top: -15px;
+  position: relative;
+}
+
 
 .permanent-content{
   flex: 1 1;

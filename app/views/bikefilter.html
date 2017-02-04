@@ -1,5 +1,5 @@
-<h1>Bracket</h1>
-<h2>bike tracking</h2>
+<img src="images/logoHeader.png" style="width: 230px; margin-bottom: 50px; margin-top: 20px;">
+
 <form class="searchbox">
   <div class="form-group">
     <div class="input-group">
@@ -10,14 +10,17 @@
     </div>
   </div>
 </form>
-<ul>
-  <li
-    ng-repeat='bike in bikeList | filter:searchBike as filteredList'
-    class="bike-row" ng-class="bike.status"
-    ng-click="updateSelection([bike])">
-    <span class="bike-id">{{bike.id}}</span>
-    <span class=" bike-type" >{{bike.type}}</span>
-    <span class="bike-last-seen">{{bike.lastSeen}}</span>
-    <span class="bike-status">{{bike.status}}</span>
-  </li>
-</ul>
+
+<button
+  type="button" class="bike-list-el btn "
+  ng-repeat='bike in bikeList | filter:searchBike as filteredList'
+  ng-class="'btn-'+bike.status"
+  ng-mouseenter="flash(bike)"
+  ng-mouseleave="unflash()"
+  ng-click="updateSelection([bike])">
+  <span class="bike-id">{{bike.id}}</span>
+  <span class=" bike-type" >{{bike.type}}</span>
+  <span class="bike-last-seen">{{bike.lastSeen}}</span>
+  <span class="bike-status">{{bike.status}}</span>
+</button>
+

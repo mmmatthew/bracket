@@ -15,7 +15,8 @@ angular.module('web2App')
     var map;
     var layers = {
       bikeLayer:L.layerGroup(),
-      bikePathLayer:L.layerGroup()
+      bikePathLayer:L.layerGroup(),
+      bracketLayer:L.layerGroup()
     };
 
     var bbox = [
@@ -48,16 +49,30 @@ angular.module('web2App')
       //  Add bike and path layers
       map.addLayer(layers.bikeLayer);
       map.addLayer(layers.bikePathLayer);
+      map.addLayer(layers.bracketLayer);
 
     };
 
+    var showBracket = function (bike) {
+        var html = '<img src="images/bracket.png">';
+        var bracketIcon = L.divIcon({html:html, className:'bracket-icon'});
+        var marker = new L.marker([bike.coords[1],bike.coords[0]], {icon:bracketIcon});
+        layers.bracketLayer.addLayer(marker);
+    };
+    var hideBrackets = function () {
+      // remove all brackets
+      layers.bracketLayer.eachLayer(function(l) {
+        map.removeLayer(l);
+      });
+    }
     var displayBikes = function (bikeList) {
       // remove all bikes
       layers.bikeLayer.eachLayer(function(l) {
         map.removeLayer(l);
       });
+      var focus = bikeList.length==1?' focus':'';
       bikeList.forEach(function(bike) {
-        var html = '<div class="bike-icon '+bike.status+'"></div>';
+        var html = '<div class="bike-icon btn-'+bike.status+focus+'"></div>';
         var bikeIcon = L.divIcon({html:html, className:''});
         var marker = new L.marker([bike.coords[1],bike.coords[0]], {icon:bikeIcon});
         marker.bikeData = bike;
@@ -84,6 +99,8 @@ angular.module('web2App')
       createMap: createMap,
       displayBikes: displayBikes,
       displayPath: displayPath,
-      removePath: removePath
+      removePath: removePath,
+      showBracket: showBracket,
+      hideBrackets: hideBrackets
     }
   });
