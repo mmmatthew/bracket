@@ -40,8 +40,9 @@ angular.module('web2App')
 
 
       // Add base layer
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      L.tileLayer('https://api.mapbox.com/styles/v1/mmatthew/ciyprzfvu001t2rpl22x5btmw/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibW1hdHRoZXciLCJhIjoiWWdtUWNMayJ9.BxS10-N7uNlhqPwH0daIew', {
         attribution: 'Copyright',
+        // zoomOffset:-1,
         id: config.mapBox.mapId,
         accessToken: config.mapBox.apiKey
       }).addTo(map);

@@ -139,6 +139,7 @@ bike-filter ul{
   border-radius: 5px;
   padding: 4px;
   cursor: pointer;
+  opacity: 0.8;
 }
 .btn-ok{
   color: #fff;
